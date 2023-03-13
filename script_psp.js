@@ -15,6 +15,7 @@ function displayProducts(products) {
     checkbox.type = "checkbox";
     checkbox.name = "productCheckbox";
     checkbox.value = product.name;
+    checkbox.addEventListener("click", enableAddButton);
     var label = document.createElement("label");
     label.innerHTML = product.name + " (" + product.skinType + ")";
     li.appendChild(checkbox);
@@ -30,6 +31,17 @@ function searchProducts() {
     return product.name.toLowerCase().includes(searchTerm);
   });
   displayProducts(filteredProducts);
+  disableAddButton();
+}
+
+function enableAddButton() {
+  var addButton = document.getElementById("addButton");
+  addButton.disabled = false;
+}
+
+function disableAddButton() {
+  var addButton = document.getElementById("addButton");
+  addButton.disabled = true;
 }
 
 function goToConflictCheckPage() {
