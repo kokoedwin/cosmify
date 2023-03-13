@@ -8,6 +8,15 @@ var productCheckboxes = [];
 
 function displayProducts(products) {
   var productList = document.getElementById("productList");
+  var checkboxes = productList.getElementsByTagName("input");
+
+  // Create a map of the current checkbox state
+  var checkboxState = {};
+  for (var i = 0; i < checkboxes.length; i++) {
+    var checkbox = checkboxes[i];
+    checkboxState[checkbox.value] = checkbox.checked;
+  }
+
   productList.innerHTML = "";
   for (var i = 0; i < products.length; i++) {
     var product = products[i];
@@ -16,9 +25,12 @@ function displayProducts(products) {
     checkbox.type = "checkbox";
     checkbox.name = "productCheckbox";
     checkbox.value = product.name;
-    if (productCheckboxes.includes(product.name)) {
+
+    // Restore the previous checkbox state, if applicable
+    if (checkboxState[product.name]) {
       checkbox.checked = true;
     }
+
     checkbox.addEventListener("click", enableAddButton);
     var label = document.createElement("label");
     label.innerHTML = product.name + " (" + product.skinType + ")";
@@ -27,6 +39,7 @@ function displayProducts(products) {
     productList.appendChild(li);
   }
 }
+
 
 function searchProducts() {
   var searchBar = document.getElementById("searchBar");
