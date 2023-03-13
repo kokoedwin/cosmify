@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cosmetic App - Skin Type Selection</title>
+    <link rel="stylesheet" type="text/css" href="style_stp.css">
+  </head>
+  <body>
+    <header>
+      <h1>Cosmetic App - Skin Type Selection</h1>
+    </header>
+    <main>
+      <p>Please select your skin type:</p>
+      <form id="skinTypeForm">
+        <input type="radio" name="skinType" value="normal" id="normal">
+        <label for="normal">Normal</label><br>
+        <input type="radio" name="skinType" value="oily" id="oily">
+        <label for="oily">Oily</label><br>
+        <input type="radio" name="skinType" value="dry" id="dry">
+        <label for="dry">Dry</label><br>
+        <input type="radio" name="skinType" value="combination" id="combination">
+        <label for="combination">Combination</label><br>
+        <br>
+        <button type="button" onclick="goToProductSelectionPage()">Continue</button>
+      </form>
+    </main>
+    <script src="script_stp.js"></script>
+  </body>
+</html>
