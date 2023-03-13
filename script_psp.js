@@ -11,7 +11,14 @@ function displayProducts(products) {
   for (var i = 0; i < products.length; i++) {
     var product = products[i];
     var li = document.createElement("li");
-    li.innerHTML = product.name + " (" + product.skinType + ")";
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = "productCheckbox";
+    checkbox.value = product.name;
+    var label = document.createElement("label");
+    label.innerHTML = product.name + " (" + product.skinType + ")";
+    li.appendChild(checkbox);
+    li.appendChild(label);
     productList.appendChild(li);
   }
 }
