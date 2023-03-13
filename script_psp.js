@@ -22,4 +22,28 @@ function searchProducts() {
   var filteredProducts = products.filter(function(product) {
     return product.name.toLowerCase().includes(searchTerm);
   });
-  displayProducts(filteredProducts
+  displayProducts(filteredProducts);
+}
+
+function goToConflictCheckPage() {
+  var selectedProducts = [];
+  var productList = document.getElementById("productList");
+  var checkboxes = productList.getElementsByTagName("input");
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      var productName = checkboxes[i].value;
+      var selectedProduct = products.find(function(product) {
+        return product.name == productName;
+      });
+      selectedProducts.push(selectedProduct);
+    }
+  }
+  if (selectedProducts.length == 0) {
+    alert("Please select at least one product.");
+  } else {
+    sessionStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+    window.location.href = "conflictCheckPage.html";
+  }
+}
+
+displayProducts(products);
