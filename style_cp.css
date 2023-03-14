@@ -1,0 +1,53 @@
+/* Set the background color of the page */
+body {
+  background-color: #f2f2f2;
+}
+
+/* Style the page header */
+header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Style the main content area */
+main {
+  margin: 20px;
+}
+
+/* Style the product list */
+#productList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the conflict result */
+#conflictResult {
+  font-weight: bold;
+}
+
+/* Style the buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Style the button that goes back to the product selection page */
+button:last-of-type {
+  background-color: #f44336;
+}
+
+button:last-of-type:hover {
+  background-color: #e53935;
+}
