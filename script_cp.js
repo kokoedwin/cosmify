@@ -20,38 +20,45 @@ function displaySelectedProducts() {
 function checkForConflicts() {
   var selectedProducts = JSON.parse(sessionStorage.getItem("selectedProducts"));
   var ingredientMap = new Map();
-  var conflictingIngredientsMap = new Map();
+  var conflicts = new Set();
   for (var i = 0; i < selectedProducts.length; i++) {
     var product = selectedProducts[i];
     for (var j = 0; j < product.ingredients.length; j++) {
       var ingredient = product.ingredients[j];
       if (ingredientMap.has(ingredient)) {
         var conflictingProduct = ingredientMap.get(ingredient);
-        var conflictingIngredients = conflictingIngredientsMap.get(conflictingProduct) || new Set();
-        conflictingIngredients.add(ingredient);
-        conflictingIngredientsMap.set(conflictingProduct, conflictingIngredients);
-        var conflictMsg = "There is a conflict between " + product.name + " and " + conflictingProduct.name + " due to ingredients: " + Array.from(conflictingIngredients).join(", ") + ".";
-        document.getElementById("conflictResult").innerHTML = conflictMsg;
-        return;
+        var conflict = [product.name, conflictingProduct.name, ingredient].sort();
+        var conflictKey = conflict.join("_");
+        if (!conflicts.has(conflictKey)) {
+          conflicts.add(conflictKey);
+        }
       }
       ingredientMap.set(ingredient, product);
       var conflictingIngredients = conflictMap[ingredient] || new Set();
       for (var conflictingIngredient of conflictingIngredients) {
         if (ingredientMap.has(conflictingIngredient)) {
           var conflictingProduct = ingredientMap.get(conflictingIngredient);
-          var conflictingIngredients = conflictingIngredientsMap.get(conflictingProduct) || new Set();
-          conflictingIngredients.add(ingredient);
-          conflictingIngredientsMap.set(conflictingProduct, conflictingIngredients);
-          var conflictMsg = "There is a conflict between " + product.name + " and " + conflictingProduct.name + " due to ingredients: " + Array.from(conflictingIngredients).join(", ") + ".";
-          document.getElementById("conflictResult").innerHTML = conflictMsg;
-          return;
+          var conflict = [product.name, conflictingProduct.name, conflictingIngredient].sort();
+          var conflictKey = conflict.join("_");
+          if (!conflicts.has(conflictKey)) {
+            conflicts.add(conflictKey);
+          }
         }
       }
     }
-    conflictingIngredientsMap.set(product, new Set());
   }
-  document.getElementById("conflictResult").innerHTML = "There are no conflicts between the selected products.";
+  if (conflicts.size > 0) {
+    var conflictMsg = "The following conflicts have been detected between selected products:";
+    conflicts.forEach(function(conflictKey) {
+      var conflict = conflictKey.split("_");
+      conflictMsg += "\n- " + conflict[0] + " and " + conflict[1] + " due to ingredient: " + conflict[2];
+    });
+    document.getElementById("conflictResult").innerHTML = conflictMsg;
+  } else {
+    document.getElementById("conflictResult").innerHTML = "There are no conflicts between the selected products.";
+  }
 }
+
 
 
 function goToSelectionPage() {
