@@ -1,4 +1,4 @@
-var products = [  {name: "Product 1", skinType: "normal", ingredients: ["Ingredient 1", "Ingredient 2", "Ingredient 3"]},
+var products = [  {name: "Product 1", skinType: ["normal", "oily"], ingredients: ["Ingredient 1", "Ingredient 2", "Ingredient 3"]},
   {name: "Product 2", skinType: "oily", ingredients: ["Ingredient 2", "Ingredient 4", "Ingredient 5"]},
   {name: "Product 3", skinType: "dry", ingredients: ["Ingredient 1", "Ingredient 3", "Ingredient 6"]},
   {name: "Product 4", skinType: "combination", ingredients: ["Ingredient 4", "Ingredient 5", "Ingredient 6"]},
